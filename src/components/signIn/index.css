@@ -1,0 +1,56 @@
+.FormDiv{
+    flex-basis: 52%;
+    width: 550px;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+@media (max-width:578px){
+    .FormDiv{
+        width: 450px;
+    }
+}
+@media (max-width:470px){
+    .FormDiv{
+        width: 330px;
+    }
+}
+.login-form{
+    width: 77%;
+}
+.ant-form-item-children{
+    width: 100% !important;
+    display: flex;
+    justify-content: space-between;
+}
+.ant-form-item-control{
+    line-height: 0px;
+}
+.ant-btn{
+    width: 100%;
+    background-color: #08f7b2;
+    border-color: #08f7b2;
+}
+.ant-checkbox-checked .ant-checkbox-inner{
+    background-color: #08f7b2;
+    border-color: #08f7b2;
+}
+.ant-checkbox-wrapper:hover .ant-checkbox-inner, .ant-checkbox:hover .ant-checkbox-inner, .ant-checkbox-input:focus + .ant-checkbox-inner{
+    border-color: #08f7b2;
+}
+a{
+    color:#08f7b2; 
+}
+/* #components-form-demo-normal-login .login-form {
+    max-width: 300px;
+  }
+  #components-form-demo-normal-login .login-form-forgot {
+    float: right;
+  }
+  #components-form-demo-normal-login .login-form-button {
+    width: 100%;
+  } */

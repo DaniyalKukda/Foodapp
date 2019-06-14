@@ -1,0 +1,30 @@
+.SignUpFormDiv{
+    height: auto;
+    width: 550px;
+    border-radius: 5px;
+    margin-top: 30px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 36px 0px;
+}
+.radioDiv{
+    width: 55%;
+    margin-bottom: 15px;
+}
+.ant-radio-group{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.ant-radio:hover .ant-radio-inner, .ant-radio-input:focus + .ant-radio-inner {
+    border-color: #08f7b2;
+}
+.ant-radio-checked .ant-radio-inner {
+    border-color: #08f7b2;
+}
+.ant-form {
+    width: 74%;
+}
