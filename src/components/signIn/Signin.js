@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { NavLink } from "react-router-dom"
 import './index.css';
 
 class Signin extends React.Component {
@@ -15,45 +16,49 @@ class Signin extends React.Component {
         const { getFieldDecorator } = this.props.form;
         console.log(getFieldDecorator)
         return (
-            <div className="FormDiv">
-                <h1>Sign In</h1>
-                <Form onSubmit={this.handleSubmit} className="login-form">
-                    <Form.Item>
-                        {getFieldDecorator('username', {
-                            rules: [{ required: true, message: 'Please input your username!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                placeholder="Username"
-                            />,
-                        )}
-                    </Form.Item>
-                    <Form.Item>
-                        {getFieldDecorator('password', {
-                            rules: [{ required: true, message: 'Please input your Password!' }],
-                        })(
-                            <Input
-                                prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                type="password"
-                                placeholder="Password"
-                            />,
-                        )}
-                    </Form.Item>
-                    <Form.Item>
-                        {getFieldDecorator('remember', {
-                            valuePropName: 'checked',
-                            initialValue: true,
-                        })(<Checkbox>Remember me</Checkbox>)}
-                        <a className="login-form-forgot" href="">
-                            Forgot password
+            <div className="mainDiv">
+                <h1 className="heading">Food App</h1>
+                <span className="line"></span>
+                <div className="FormDiv">
+                    <h1>Sign In</h1>
+                    <Form onSubmit={this.handleSubmit} className="login-form">
+                        <Form.Item>
+                            {getFieldDecorator('username', {
+                                rules: [{ required: true, message: 'Please input your username!' }],
+                            })(
+                                <Input
+                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    placeholder="Username"
+                                />,
+                            )}
+                        </Form.Item>
+                        <Form.Item>
+                            {getFieldDecorator('password', {
+                                rules: [{ required: true, message: 'Please input your Password!' }],
+                            })(
+                                <Input
+                                    prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                    type="password"
+                                    placeholder="Password"
+                                />,
+                            )}
+                        </Form.Item>
+                        <Form.Item>
+                            {getFieldDecorator('remember', {
+                                valuePropName: 'checked',
+                                initialValue: true,
+                            })(<Checkbox>Remember me</Checkbox>)}
+                            <a className="login-form-forgot" href="">
+                                Forgot password
           </a>
 
-                    </Form.Item>
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        Log in
+                        </Form.Item>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Log in
           </Button><br />
-                    Or <a href="">register now!</a>
-                </Form>
+          <NavLink to="/signup">Register Now!</NavLink>
+                    </Form>
+                </div>
             </div>
         )
     }
