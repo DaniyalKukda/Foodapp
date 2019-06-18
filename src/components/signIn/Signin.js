@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
-import { NavLink } from "react-router-dom"
+import { NavLink } from "react-router-dom";
+import Login from '../../Auth/loginauth';
 import './index.css';
 
 class Signin extends React.Component {
@@ -9,6 +10,7 @@ class Signin extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
+                Login(values)
             }
         });
     };
@@ -23,14 +25,21 @@ class Signin extends React.Component {
                     <h1>Sign In</h1>
                     <Form onSubmit={this.handleSubmit} className="login-form">
                         <Form.Item>
-                            {getFieldDecorator('username', {
-                                rules: [{ required: true, message: 'Please input your username!' }],
-                            })(
-                                <Input
-                                    prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
-                                    placeholder="Username"
-                                />,
-                            )}
+                            {getFieldDecorator('email', {
+                                rules: [
+                                    {
+                                        type: 'email',
+                                        message: 'The input is not valid E-mail!',
+                                    },
+                                    {
+                                        required: true,
+                                        message: 'Please input your E-mail!',
+                                    },
+                                ],
+                            })(<Input
+                                prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+                                placeholder="example@email.com"
+                            />)}
                         </Form.Item>
                         <Form.Item>
                             {getFieldDecorator('password', {
@@ -46,7 +55,7 @@ class Signin extends React.Component {
                         <Form.Item>
                             {getFieldDecorator('remember', {
                                 valuePropName: 'checked',
-                                initialValue: true,
+                                initialValue: false,
                             })(<Checkbox>Remember me</Checkbox>)}
                             <a className="login-form-forgot" href="">
                                 Forgot password
@@ -56,7 +65,7 @@ class Signin extends React.Component {
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Log in
           </Button><br />
-          <NavLink to="/signup">Register Now!</NavLink>
+                        <NavLink to="/signup">Register Now!</NavLink>
                     </Form>
                 </div>
             </div>

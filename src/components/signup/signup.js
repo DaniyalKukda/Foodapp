@@ -6,20 +6,51 @@ import {
     InputNumber,
     Checkbox,
     Button,
-    Radio
+    Radio,
+    Upload,
+    message,
+    Icon
 } from 'antd';
 import { NavLink } from "react-router-dom";
 import './index.css'
-import { signupAuth } from '../../Auth/signupauth'
+import { signupAuth ,ResturantRegistration } from '../../Auth/signupauth'
 
 const { Option } = Select;
 
 class Signup extends React.Component {
-    state = {
-        confirmDirty: false,
-        autoCompleteResult: [],
-        radioValue: "User",
-    };
+    constructor(){
+        super();
+        this.state = {
+            confirmDirty: false,
+            autoCompleteResult: [],
+            radioValue: "User",
+        };
+
+    }
+    
+    // uploadimg = {
+    //     name: 'file',
+    //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
+    //     headers: {
+    //         authorization: 'authorization-text',
+    //     },
+    //     onChange(info) {
+    //         if (info.file.status !== 'uploading') {
+    //             console.log('uploadimg==>>', info.file, info.fileList);
+    //             this.setState({
+    //                 file:info.file
+    //             })
+    //         }
+    //         if (info.file.status === 'done') {
+    //             message.success(`${info.file.name} file uploaded successfully`);
+    //         } else if (info.file.status === 'error') {
+    //             message.error(`${info.file.name} file upload failed.`);
+    //         }
+    //     },
+    // };
+    // HandleCertificate = (info) => {
+        
+    // }
     onChange = (value) => {
         this.setState({
             gender: value
@@ -59,21 +90,32 @@ class Signup extends React.Component {
         });
     };
     handleSubmitResturant = e => {
-        let { fullName, gender, age, country, city, radioValue } = this.state;
+        let { resturantName, ownerName, file, country, city, radioValue } = this.state;
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                let resturantData = {
+                    resturantName,
+                    ownerName,
+                    country,
+                    city,
+                    type: radioValue,
+                    file,
+                    email:values.email,
+                    password:values.password
+                }
+                ResturantRegistration(resturantData)
             }
         })
     }
-    handleResturantName = e =>{
+    handleResturantName = e => {
         this.setState({
-            resturantName : e.target.value
+            resturantName: e.target.value
         })
     }
-    handleOwnerName = e =>{
+    handleOwnerName = e => {
         this.setState({
-            ownerName : e.target.value
+            ownerName: e.target.value
         })
     }
     handleConfirmBlur = e => {
@@ -247,10 +289,10 @@ class Signup extends React.Component {
                             <p>Register as a Resturant</p>
 
                             <Form.Item label="Resturant-Name">
-                                <Input onChange={(e)=> this.handleResturantName(e)} />
+                                <Input onChange={(e) => this.handleResturantName(e)} />
                             </Form.Item>
                             <Form.Item label="Owner-Name">
-                                <Input onChange={(e)=>this.handleOwnerName(e)} />
+                                <Input onChange={(e) => this.handleOwnerName(e)} />
                             </Form.Item>
                             <Form.Item label="E-mail">
                                 {getFieldDecorator('email', {
@@ -293,11 +335,26 @@ class Signup extends React.Component {
                                 })(<Input.Password onBlur={this.handleConfirmBlur} />)}
                             </Form.Item>
                             <Form.Item label="Country">
-                                <Input onChange={(e)=> this.handleCountry(e)} />
+                                <Input onChange={(e) => this.handleCountry(e)} />
                             </Form.Item>
                             <Form.Item label="City">
-                                <Input onChange={(e)=> this.handleCity(e)} />
+                                <Input onChange={(e) => this.handleCity(e)} />
                             </Form.Item>
+                            {/* <Form.Item label="Certificate">
+                                {/* <Upload {...this.uploadimg}>
+                                    <Button>
+                                        <Icon type="upload" /> Click to Upload
+                                    </Button>
+                                </Upload> */}
+                            {/* //</Form.Item> */}
+                            
+                            <input type="file" id="img" onChange={() => {
+                                var img = document.getElementById("img").files[0]
+                                this.setState({
+                                    file:img
+                                })
+                                console.log(img)
+                            }} />
 
                             <Form.Item {...tailFormItemLayout}>
                                 {getFieldDecorator('agreement', {
