@@ -13,12 +13,12 @@ import {
 } from 'antd';
 import { NavLink } from "react-router-dom";
 import './index.css'
-import { signupAuth ,ResturantRegistration } from '../../Auth/signupauth'
+import { signupAuth, ResturantRegistration } from '../../Auth/signupauth'
 
 const { Option } = Select;
 
 class Signup extends React.Component {
-    constructor(){
+    constructor() {
         super();
         this.state = {
             confirmDirty: false,
@@ -27,7 +27,7 @@ class Signup extends React.Component {
         };
 
     }
-    
+
     // uploadimg = {
     //     name: 'file',
     //     action: 'https://www.mocky.io/v2/5cc8019d300000980a055e76',
@@ -49,7 +49,7 @@ class Signup extends React.Component {
     //     },
     // };
     // HandleCertificate = (info) => {
-        
+
     // }
     onChange = (value) => {
         this.setState({
@@ -101,8 +101,8 @@ class Signup extends React.Component {
                     city,
                     type: radioValue,
                     file,
-                    email:values.email,
-                    password:values.password
+                    email: values.email,
+                    password: values.password
                 }
                 ResturantRegistration(resturantData)
             }
@@ -281,8 +281,9 @@ class Signup extends React.Component {
                                 Register
           </Button>
                         </Form.Item>
-                        <NavLink to="/">already have an account ?</NavLink>
-
+                        <div className="navlinkparent">
+                                <NavLink to="/">already have an account ?</NavLink>
+                            </div>
                     </Form>
                         :
                         <Form {...formItemLayout} onSubmit={this.handleSubmitResturant}>
@@ -347,11 +348,11 @@ class Signup extends React.Component {
                                     </Button>
                                 </Upload> */}
                             {/* //</Form.Item> */}
-                            
+
                             <input type="file" id="img" onChange={() => {
                                 var img = document.getElementById("img").files[0]
                                 this.setState({
-                                    file:img
+                                    file: img
                                 })
                                 console.log(img)
                             }} />
@@ -370,8 +371,9 @@ class Signup extends React.Component {
                                     Register
           </Button>
                             </Form.Item>
-                            <NavLink to="/">already have an account ?</NavLink>
-
+                            <div className="navlinkparent">
+                                <NavLink to="/">already have an account ?</NavLink>
+                            </div>
                         </Form>
                     }
 

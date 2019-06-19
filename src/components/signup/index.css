@@ -60,3 +60,8 @@
 .ant-form {
     width: 74%;
 }
+.navlinkparent{
+    display: flex;
+    justify-content: flex-end;
+    width: 345px;
+}

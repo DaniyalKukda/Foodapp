@@ -1,7 +1,9 @@
 import React from 'react';
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox ,message } from 'antd';
 import { NavLink } from "react-router-dom";
 import Login from '../../Auth/loginauth';
+import { connect } from "react-redux";
+import { updateUser } from './../../store/action/action';
 import './index.css';
 
 class Signin extends React.Component {
@@ -10,7 +12,18 @@ class Signin extends React.Component {
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
-                Login(values)
+                Login(values).then((data) => {
+                    this.props.updateUser(data)
+                    if (data.type === "User") {
+                        this.props.history.push("./userview")
+                    } else if (data.type === "Resturant") {
+                        this.props.history.push("./resturantview")
+                    }
+                    message.success(data.type +'Login successfully');
+                }).catch((err)=>{
+                    message.error(err,message);
+
+                })
             }
         });
     };
@@ -65,7 +78,7 @@ class Signin extends React.Component {
                         <Button type="primary" htmlType="submit" className="login-form-button">
                             Log in
           </Button><br />
-                        <NavLink to="/signup">Register Now!</NavLink>
+                        <NavLink className="already" to="/signup">Register Now!</NavLink>
                     </Form>
                 </div>
             </div>
@@ -74,4 +87,11 @@ class Signin extends React.Component {
 }
 const WrappedNormalLoginForm = Form.create({ name: 'normal_login' })(Signin);
 
-export default WrappedNormalLoginForm
+const mapDispatchToProps = (dispatch) => {
+    return {
+        updateUser : (user) => dispatch(updateUser(user))
+    }
+
+}
+
+export default connect(null,mapDispatchToProps)(WrappedNormalLoginForm)
