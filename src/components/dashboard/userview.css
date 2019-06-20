@@ -1,0 +1,7 @@
+.ant-tabs-nav .ant-tabs-tab-active {
+    color: #072e41;
+    font-weight: 500;
+}
+.ant-tabs-nav .ant-tabs-tab:hover {
+    color: #08f7b2;
+}

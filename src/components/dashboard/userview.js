@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Tabs, Icon } from 'antd';
 import Navbar from '../navbar/navbar';
 import Resturantsusertabview from "../tabsview/Resturantusertabview/resturantusertabview";
+import Myrequestusertabview from '../tabsview/Myrequestusertabview/myrequestusertabview';
+import "./userview.css"
 
 const { TabPane } = Tabs;
 const center = {
@@ -35,7 +37,7 @@ class Userview extends Component {
             }
             key="2"
           >
-            Tab 2
+            <Myrequestusertabview />
     </TabPane>
         </Tabs>
         </div>

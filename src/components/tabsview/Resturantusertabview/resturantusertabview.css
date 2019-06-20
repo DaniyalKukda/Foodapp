@@ -1,5 +1,6 @@
-.tags-container{
-    margin-top: 25px;
+.tags-container {
+  margin-top: 25px;
+  margin-bottom: 25px;
 }
 .demo-infinite-container {
     border: 1px solid #e8e8e8;
@@ -17,3 +18,7 @@
   .searchandtagcenter{
       text-align: center;
   }
+
+.ant-tag-checkable-checked {
+    background-color: #072e41;
+}

@@ -1,0 +1,17 @@
+.our-menu-heading {
+  text-align: center;
+  font-size: 32px;
+  line-height: 3;
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 700;
+  position: relative;
+}
+.our-menu-heading::after{
+    position: absolute;
+    border-top: 3px solid #08f7b2;
+    width: 60px;
+    content: '';
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+}
