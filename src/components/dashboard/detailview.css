@@ -15,3 +15,13 @@
     left: 50%;
     transform: translateX(-50%);
 }
+.tag-con{
+  display: flex;
+  justify-content:center; 
+}
+.ant-tag-checkable{
+  font-size: 14px;
+  padding: 6px 25px;
+  border-radius: 15px;
+  border: 1px solid;
+}

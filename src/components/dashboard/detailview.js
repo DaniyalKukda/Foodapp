@@ -9,7 +9,7 @@ const tagsFromServer = ['All','Fast Food', 'BarbQ', 'Karahi', 'Chinees'];
 
 class Detailview extends Component {
     state = {
-        selectedTags: [],
+        selectedTags: ["All"],
     };
 
     handleChange(tag, checked) {
@@ -32,7 +32,7 @@ class Detailview extends Component {
                     <h1 className="our-menu-heading">Our Menu</h1>
                 </div>
                 <div>
-                    <div>
+                    <div className="tag-con">
                         {tagsFromServer.map(tag => (
                             <CheckableTag
                                 key={tag}
