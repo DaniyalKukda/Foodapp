@@ -25,3 +25,14 @@
   border-radius: 15px;
   border: 1px solid;
 }
+.All-food-items{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.card-img{
+  height: 300px;
+}
+.card-container{
+  margin-top: 50px;
+}
