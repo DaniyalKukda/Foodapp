@@ -1,18 +1,38 @@
 import React from 'react'
-import { Drawer, Form, Button, Col, Row, Input, Select, DatePicker, Icon } from 'antd';
+import { Drawer, Form, Button, Col, Row, Input, Select } from 'antd';
+
 
 const { Option } = Select;
 
 class DrawerForm extends React.Component {
-
-
+  constructor(){
+    super();
+    this.state = {
+      fooditem:"",
+      description:""
+    }
+  }
+  handleDescription(e){
+    this.setState({
+      description:e.target.value
+    })
+  }
+  handleFoodName(e){
+    this.setState({
+      fooditem:e.target.value
+    })
+  }
+  onsubmitEvent(){
+    console.log(this.state)
+  }
   render() {
     const { getFieldDecorator } = this.props.form;
+ 
     return (
       <div>
-        
+
         <Drawer
-          title="Create a new account"
+          title="Upload Food Item"
           width={720}
           onClose={this.props.onClose}
           visible={this.props.visible}
@@ -22,80 +42,30 @@ class DrawerForm extends React.Component {
               <Col span={12}>
                 <Form.Item label="Name">
                   {getFieldDecorator('name', {
-                    rules: [{ required: true, message: 'Please enter user name' }],
-                  })(<Input placeholder="Please enter user name" />)}
+                    rules: [{ required: true, message: 'Please Enter Food Name' }],
+                  })(<Input placeholder="Please Enter Food Name" onClick={(e)=> this.handleFoodName(e)} />)}
                 </Form.Item>
               </Col>
               <Col span={12}>
-                <Form.Item label="Url">
-                  {getFieldDecorator('url', {
-                    rules: [{ required: true, message: 'Please enter url' }],
+                <Form.Item label="Upload Item Image">
+                  {getFieldDecorator('Image', {
+                    rules: [{ required: true, message: 'Please upload a image' }],
                   })(
-                    <Input
-                      style={{ width: '100%' }}
-                      addonBefore="http://"
-                      addonAfter=".com"
-                      placeholder="Please enter url"
-                    />,
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="Owner">
-                  {getFieldDecorator('owner', {
-                    rules: [{ required: true, message: 'Please select an owner' }],
-                  })(
-                    <Select placeholder="Please select an owner">
-                      <Option value="xiao">Xiaoxiao Fu</Option>
-                      <Option value="mao">Maomao Zhou</Option>
-                    </Select>,
-                  )}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="Type">
-                  {getFieldDecorator('type', {
-                    rules: [{ required: true, message: 'Please choose the type' }],
-                  })(
-                    <Select placeholder="Please choose the type">
-                      <Option value="private">Private</Option>
-                      <Option value="public">Public</Option>
-                    </Select>,
-                  )}
-                </Form.Item>
-              </Col>
-            </Row>
-            <Row gutter={16}>
-              <Col span={12}>
-                <Form.Item label="Approver">
-                  {getFieldDecorator('approver', {
-                    rules: [{ required: true, message: 'Please choose the approver' }],
-                  })(
-                    <Select placeholder="Please choose the approver">
-                      <Option value="jack">Jack Ma</Option>
-                      <Option value="tom">Tom Liu</Option>
-                    </Select>,
-                  )}
-                </Form.Item>
-              </Col>
-              <Col span={12}>
-                <Form.Item label="DateTime">
-                  {getFieldDecorator('dateTime', {
-                    rules: [{ required: true, message: 'Please choose the dateTime' }],
-                  })(
-                    <DatePicker.RangePicker
-                      style={{ width: '100%' }}
-                      getPopupContainer={trigger => trigger.parentNode}
-                    />,
+                    <input type="file" id="img2" onChange={(e) => {
+                      var img = e.files[0];
+                      console.log(img)
+                      // this.setState({
+                      //   file: img
+                      // })
+                      console.log(img)
+                    }} />
                   )}
                 </Form.Item>
               </Col>
             </Row>
             <Row gutter={16}>
               <Col span={24}>
-                <Form.Item label="Description">
+                <Form.Item label="Description & Item Price Enter Here">
                   {getFieldDecorator('description', {
                     rules: [
                       {
@@ -103,7 +73,7 @@ class DrawerForm extends React.Component {
                         message: 'please enter url description',
                       },
                     ],
-                  })(<Input.TextArea rows={4} placeholder="please enter url description" />)}
+                  })(<Input.TextArea rows={6} placeholder="please enter url description" onChange={(e) => this.handleDescription(e)} />)}
                 </Form.Item>
               </Col>
             </Row>
@@ -120,10 +90,7 @@ class DrawerForm extends React.Component {
               textAlign: 'right',
             }}
           >
-            <Button onClick={this.props.onClose} style={{ marginRight: 8 }}>
-              Cancel
-            </Button>
-            <Button onClick={this.props.onClose} type="primary">
+            <Button onClick={this.onsubmitEvent.bind(this)} type="primary">
               Submit
             </Button>
           </div>
