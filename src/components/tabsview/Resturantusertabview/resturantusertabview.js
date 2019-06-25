@@ -1,39 +1,60 @@
 import { Avatar, Input, List, message, Spin, Tag } from 'antd';
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
+import firebase from '../../../config/firebase';
 import reqwest from 'reqwest';
 import './resturantusertabview.css';
+import { func } from 'prop-types';
 
 
 const fakeDataUrl = 'https://randomuser.me/api/?results=10&inc=name,gender,email,nat&noinfo';
 const Search = Input.Search;
 const CheckableTag = Tag.CheckableTag;
 const tagsFromServer = ['Chinese', 'Fast food', ' Bar B.Q', 'Desi'];
-const left = { textAlign:'left'}
+const left = { textAlign: 'left' }
 class Resturantusertabview extends Component {
-    state = {
-        selectedTags: [],
-        data: [],
-        loading: false,
-        hasMore: true,
-    };
-    componentDidMount() {
-        this.fetchData(res => {
-            this.setState({
-                data: res.results,
-            });
-        });
+    constructor() {
+        super();
+        this.state = {
+            selectedTags: [],
+            data: [],
+            loading: false,
+            hasMore: true,
+            AllResturant: []
+        };
+        this.fetchData = this.fetchData.bind(this)
     }
-    fetchData = callback => {
-        reqwest({
-            url: fakeDataUrl,
-            type: 'json',
-            method: 'get',
-            contentType: 'application/json',
-            success: res => {
-                callback(res);
-            },
+    componentDidMount() {
+        // this.fetchData(res => {
+        //     this.setState({
+        //         data: res.results,
+        //     });
+        // });
+        this.fetchData();
+    }
+    fetchData = function () {
+        let Resturant = [];
+        firebase.firestore().collection("users").get().then((querySnapshot) => {
+            querySnapshot.forEach((doc) => {
+                let AllUsersData = doc.data();
+                if (AllUsersData.type === "Resturant") {
+                    Resturant.push(AllUsersData)
+                }
+            });
+            this.setState({
+                AllResturant: Resturant
+            })
         });
+        // reqwest({
+        //     url: fakeDataUrl,
+        //     type: 'json',
+        //     method: 'get',
+        //     contentType: 'application/json',
+        //     success: res => {
+        //         callback(res);
+        //     },
+        // });
+
     };
 
     handleInfiniteOnLoad = () => {
@@ -65,7 +86,9 @@ class Resturantusertabview extends Component {
         this.setState({ selectedTags: nextSelectedTags });
     }
     render() {
-        const { selectedTags } = this.state;
+
+        console.log("check all resturant",this.state.AllResturant)
+        const { selectedTags , AllResturant } = this.state;
         return (
             <div>
                 <div className="searchandtagcenter">
@@ -97,17 +120,16 @@ class Resturantusertabview extends Component {
                             useWindow={false}
                         >
                             <List
-                                dataSource={this.state.data}
+                                dataSource={AllResturant}
                                 renderItem={item => (
-                                    <List.Item key={item.id}>
+                                    <List.Item key={Math.random(50)}>
                                         <List.Item.Meta
                                             avatar={
-                                                <Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
+                                                <Avatar>{item.resturantName.substr(0,1)}</Avatar>
                                             }
-                                            title={<a href="https://ant.design">{item.name.last}</a>}
+                                            title={<a href="/home/detail-view">{item.resturantName}</a>}
                                             description={item.email}
                                         />
-                                        <div>Content</div>
                                     </List.Item>
                                 )}
                             >

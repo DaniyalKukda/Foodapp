@@ -6,6 +6,7 @@ import Signup from './signup/signup';
 import Userview from './dashboard/userview';
 import Resturantview from './dashboard/resturantview';
 import Deatailview from './dashboard/detailview';
+import navbar from './navbar/navbar';
 
 class Main extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class Main extends React.Component {
         <Route path="/userview" component={Userview} />
         <Route path="/resturantview" component={Resturantview} />
         <Route path="/home/detail-view" component={Deatailview} />
+        {/* <Route path="/home/navbar" component={navbar} /> */}
       </Router>
     )
   }
