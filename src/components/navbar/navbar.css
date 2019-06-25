@@ -1,3 +1,7 @@
 .MuiToolbar-root{
     justify-content: space-between;
 }
+.MuiButton-label{
+    color: white;
+    display: initial;
+}
