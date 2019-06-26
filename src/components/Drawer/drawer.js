@@ -1,5 +1,5 @@
 import React from 'react'
-import { Drawer, Form, Button, Col, Row, Input, Select ,message} from 'antd';
+import { Drawer, Form, Button, Col, Row, Input, Select, message } from 'antd';
 import firebase from "../../config/firebase";
 
 const { Option } = Select;
@@ -22,39 +22,50 @@ class DrawerForm extends React.Component {
       description: e.target.value
     })
   }
+  handleCategory(value) {
+    this.setState({
+      category:value
+    })
+    console.log(value)
+  }
 
   onsubmitEvent() {
     this.insertData()
   }
   insertData = () => {
-    let { fooditem, description, file } = this.state;
+    let { fooditem, description, file ,category } = this.state;
     let currentUserId = firebase.auth().currentUser.uid;
     let storageRef = firebase.storage().ref().child(`foodItemImage/${file.name}`)
     storageRef.put(file).then((url) => {
       url.ref.getDownloadURL().then((urlref) => {
         var path = urlref;
-        let obj ={
+        console.log(this.state.category)
+        let obj = {
           fooditem,
           description,
+          category,
           path
         }
-        firebase.firestore().collection('fooditems').doc(currentUserId)
+        firebase.firestore().collection('fooditems').doc(currentUserId).collection("AllItems").doc()
           .set(obj).then((suceess) => {
             message.success("Item has been added")
           }).catch((eerr) => {
             message.error(eerr.message)
+            console.log(eerr)
           })
-        }).catch((eerr) => {
-          message.error(eerr.message)
-        })
-      }) .catch((eerr) => {
+      }).catch((eerr) => {
         message.error(eerr.message)
+        console.log(eerr)
       })
+    }).catch((eerr) => {
+      message.error(eerr.message)
+      console.log(eerr)
+    })
   }
   render() {
-          const { getFieldDecorator } = this.props.form;
-
-          return(
+    const { getFieldDecorator } = this.props.form;
+    
+    return (
       <div>
 
         <Drawer
@@ -84,6 +95,15 @@ class DrawerForm extends React.Component {
                       })
                     }} />
                   )}
+                </Form.Item>
+              </Col>
+              <Col span={12}>
+                <Form.Item label="Select Food Category">
+                  <Select defaultValue="Fastfood" style={{ width: 120 }} onChange={this.handleCategory.bind(this)}>
+                    <Option value="Fastfood">Fastfood</Option>
+                    <Option value="veg">veg</Option>
+                    <Option value="salad">salad</Option>
+                  </Select>
                 </Form.Item>
               </Col>
             </Row>
@@ -121,8 +141,8 @@ class DrawerForm extends React.Component {
         </Drawer>
       </div >
     );
-    }
+  }
 }
 
-  const DrawerApp = Form.create()(DrawerForm);
-  export default DrawerApp;
+const DrawerApp = Form.create()(DrawerForm);
+export default DrawerApp;

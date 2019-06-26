@@ -4,6 +4,7 @@ import './detailview.css'
 import Navbar from '../navbar/navbar';
 import Banner from '../Banner/banner';
 import Card from "../detailviewcard/detailviewcard";
+import firebase from "../../config/firebase";
 const CheckableTag = Tag.CheckableTag;
 const tagsFromServer = ['All', 'Fastfood', 'veg', 'salad'];
 
@@ -89,6 +90,22 @@ class Detailview extends Component {
             }
         ]
     };
+    componentDidMount(){
+        this.fetchFoodItemsForResturant()
+    }
+    fetchFoodItemsForResturant(){
+        // let currentUserId = firebase.auth().currentUser.uid;
+        // console.log(currentUserId)
+        firebase.auth().onAuthStateChanged((user) => {
+            if(user){
+                console.log(user.uid)
+                firebase.firestore().collection('fooditems').doc(user.uid).collection("AllItems").get().then((success) => {
+                        console.log(success)
+                    
+                }).catch((err) => console.log(err.message))
+            }
+        })
+    }
 
     handleChange(tag, checked) {
         const { selectedTags } = this.state;
