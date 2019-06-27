@@ -8,6 +8,8 @@ import './banner.css';
 const BgElement = Element.BgElement;
 class Banner extends React.Component {
     render() {
+        let { city , country  , resturantName ,ownerName } = this.props.user
+        console.log(this.props)
         return (
             <BannerAnim prefixCls="banner-user" autoPlay>
                 <Element
@@ -22,12 +24,12 @@ class Banner extends React.Component {
                         }}
                     />
                     <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from' }}>
-                        Hotel name yha ayega
+                        {`${resturantName}`}
                     </TweenOne>
                     <TweenOne className="banner-user-text"
                         animation={{ y: 30, opacity: 0, type: 'from', delay: 50 }}
                     >
-                        Description yha ayegi
+                        Resturant Owner Name { ownerName } resturant location is {city + " " + country}
                     </TweenOne>
                 </Element>
                 <Element
@@ -42,12 +44,12 @@ class Banner extends React.Component {
                         }}
                     />
                     <TweenOne className="banner-user-title" animation={{ y: 30, opacity: 0, type: 'from' }}>
-                        Hotel ka name yha ayega
+                    {`${resturantName}`}
                     </TweenOne>
                     <TweenOne className="banner-user-text"
                         animation={{ y: 30, opacity: 0, type: 'from', delay: 50 }}
                     >
-                        Hotel ki description yha ayegi
+                        Resturant Owner Name { ownerName } resturant location is {city + " " + country}
                     </TweenOne>
                 </Element>
             </BannerAnim>

@@ -15,7 +15,7 @@ class Main extends React.Component {
         <Route path="/signup" component={Signup} />
         <Route path="/userview" component={Userview} />
         <Route path="/resturantview" component={Resturantview} />
-        <Route path="/home/detail-view" component={Deatailview} />
+        <Route path="/home/detail-view/:id" component={Deatailview} />
       </Router>
     )
   }

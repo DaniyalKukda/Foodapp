@@ -2,6 +2,7 @@ import { Avatar, Input, List, message, Spin, Tag } from 'antd';
 import React, { Component } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import firebase from '../../../config/firebase';
+import {NavLink} from "react-router-dom"
 import reqwest from 'reqwest';
 import './resturantusertabview.css';
 import { func } from 'prop-types';
@@ -127,7 +128,7 @@ class Resturantusertabview extends Component {
                                             avatar={
                                                 <Avatar>{item.resturantName.substr(0,1)}</Avatar>
                                             }
-                                            title={<a href="/home/detail-view">{item.resturantName}</a>}
+                                            title={<NavLink to={`/home/detail-view/${item.uid}`}>{item.resturantName}</NavLink>}
                                             description={item.email}
                                         />
                                     </List.Item>

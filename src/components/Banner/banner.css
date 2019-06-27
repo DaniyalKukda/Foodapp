@@ -8,11 +8,15 @@
     overflow: hidden;
   }
   .banner-user-elem .banner-user-title{
-    font-size: 32px;
+    font-size: 52px;
     top: 40%;
+    color: black;
+    background: white;
+    /* width: 50px; */
   }
   .banner-user-elem .banner-user-text{
     top: 40%;
+    font-size: 30px
   }
   .banner-anim-elem .bg{
     width: 100%;

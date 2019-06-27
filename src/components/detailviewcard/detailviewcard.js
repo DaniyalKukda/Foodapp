@@ -14,9 +14,11 @@ export default function detailviewcard(props) {
                     className="card-img"
                 />
             }
-            actions={[<Button size={"medium"}>
+            actions={[props.type === "Resturant" ? <Button size={"medium"}>
+                Edit Item
+        </Button> : <Button size={"medium"}>
                 Order Now!
-        </Button>]}
+        </Button> ]}
         >
             <Meta
                 avatar={<Avatar style={{ color: '#f56a00', backgroundColor: '#fde3cf' }}>{props.name.substr(0,1)}</Avatar>}

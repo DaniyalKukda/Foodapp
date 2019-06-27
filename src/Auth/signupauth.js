@@ -4,7 +4,9 @@ import { message } from 'antd'
 export const signupAuth = (data) => {
     firebase.auth().createUserWithEmailAndPassword(data.email, data.password)
         .then((res) => {
-            firebase.firestore().collection('users').doc(res.user.uid)
+            var uid = res.user.uid;
+            data.uid = uid
+            firebase.firestore().collection('users').doc(uid)
                 .set(data).then((suceess) => {
                     firebase.auth().currentUser.sendEmailVerification()
                         .then(() => {
@@ -31,6 +33,7 @@ export const ResturantRegistration = (data) => {
                 url.ref.getDownloadURL().then((urlref) => {
                     data.file = urlref;
                     let userId = firebase.auth().currentUser.uid;
+                    data.uid = userId
                     firebase.firestore().collection('users').doc(userId)
                         .set(data).then((suceess) => {
                             firebase.auth().currentUser.sendEmailVerification()

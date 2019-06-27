@@ -8,8 +8,7 @@ class DrawerForm extends React.Component {
   constructor() {
     super();
     this.state = {
-      // fooditem:"",
-      // description:""
+      category:"Fastfood"
     }
   }
   handleFoodName(e) {

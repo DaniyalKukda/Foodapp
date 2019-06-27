@@ -49,7 +49,7 @@ class SimpleAppBar extends React.Component {
           </Typography>
             <div style={{ display: "flex" }}>
               {
-                this.props.user ? this.props.user.type === "Resturant" ? <div><Button color="inherit" onClick={() => this.props.history.push("/home/detail-view")}>All Items</Button>
+                this.props.user ? this.props.user.type === "Resturant" ? <div><Button color="inherit" onClick={() => this.props.history.push(`/home/detail-view/${this.props.user.uid}`)}>All Items</Button>
                 <Button color="inherit" onClick={() => this.props.history.push("/resturantview")}>Order Status </Button>
                 <Button type="inherit" onClick={this.showDrawer}>
                   Add <Icon type="plus" />
