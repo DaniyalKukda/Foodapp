@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Button, Avatar } from 'antd';
 import firebase from "../../config/firebase";
+import {message} from "antd"
 const { Meta } = Card;
 
 export default function detailviewcard(props) {
@@ -12,11 +13,12 @@ export default function detailviewcard(props) {
             itemId : props.docid,
             ItemName : props.name,
             customerName: props.userData.fullName,
-            status:"pending"
+            status:"pending",
+            picture:props.picture
         }
         console.log(order,userid)
         firebase.firestore().collection("Order").doc(userid).collection("All Orders").doc().set(order).then((res) => {
-            console.log("success",res)
+            message.success("Order Request Has Been Send Successfully")
         }).catch((err)=>{
             console.log(err.messsage)
         })
