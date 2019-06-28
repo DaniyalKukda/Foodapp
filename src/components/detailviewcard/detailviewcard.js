@@ -1,9 +1,26 @@
 import React from 'react';
 import { Card, Button, Avatar } from 'antd';
-
+import firebase from "../../config/firebase";
 const { Meta } = Card;
 
 export default function detailviewcard(props) {
+    console.log("card props",props)
+    const orderNow = () => {
+        let userid = props.userData.uid;
+        let order ={
+            ResturantID : props.resturantID,
+            itemId : props.docid,
+            ItemName : props.name,
+            customerName: props.userData.fullName,
+            status:"pending"
+        }
+        console.log(order,userid)
+        firebase.firestore().collection("Order").doc(userid).collection("All Orders").doc().set(order).then((res) => {
+            console.log("success",res)
+        }).catch((err)=>{
+            console.log(err.messsage)
+        })
+    }
     return (
         <Card
             style={{ width: 300 }}
@@ -14,9 +31,9 @@ export default function detailviewcard(props) {
                     className="card-img"
                 />
             }
-            actions={[props.type === "Resturant" ? <Button size={"medium"}>
+            actions={[props.userData.type === "Resturant" ? <Button size={"medium"}>
                 Edit Item
-        </Button> : <Button size={"medium"}>
+        </Button> : <Button size={"medium"} onClick={() => orderNow()}>
                 Order Now!
         </Button> ]}
         >

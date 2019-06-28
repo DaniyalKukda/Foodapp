@@ -29,7 +29,11 @@ class Detailview extends Component {
             let arr = []
             success.forEach((doc) => {
                 // console.log(doc.id, " => ", doc.data());
-                arr.push(doc.data())
+                let docid = doc.id;
+                let data = doc.data();
+                data.docid = docid;
+
+                arr.push(data)
                 //    console.log(data[0])
                 this.setState({ FoodItem: arr })
             })
@@ -65,7 +69,7 @@ class Detailview extends Component {
         // this.setState({ selectedTags: nextSelectedTags });
     }
     render() {
-        const { selectedTags, FoodItem ,resturantData} = this.state;
+        const { selectedTags, FoodItem ,resturantData , id} = this.state;
         console.log(resturantData)
         return (
             <div>
@@ -97,11 +101,11 @@ class Detailview extends Component {
                         selectedTags === "All" ?
                             FoodItem.length && FoodItem.map((e, i) => {
                                 console.log("eeeeee", e.category)
-                                return <div className="card-container"><Card name={e.fooditem} type={this.props.user.type} description={e.description} picture={e.path} /></div>
+                                return <div className="card-container"><Card resturantID={id} docid={e.docid} name={e.fooditem} userData={this.props.user} description={e.description} picture={e.path} /></div>
                             }) : FoodItem.filter((s) => {
                                 return s.category === selectedTags
                             }).map((e) => {
-                                return <div className="card-container"><Card name={e.fooditem} type={this.props.user.type} description={e.description} picture={e.path} /></div>
+                                return <div className="card-container"><Card resturantID={id} docid={e.docid} name={e.fooditem} userData={this.props.user} description={e.description} picture={e.path} /></div>
                             })
                     }
                 </div>
