@@ -3,7 +3,8 @@ import { Card, Icon, Avatar } from 'antd';
 
 const { Meta } = Card;
 
-class RestaurantViewShowRequest extends Component {
+class 
+RestaurantViewShowRequest extends Component {
     render() {
         return (
             <div>
@@ -22,15 +23,16 @@ class RestaurantViewShowRequest extends Component {
                                     cover={
                                         <img
                                             alt="example"
-                                            src={`https://picsum.photos/200/300?random=${i}`}
+                                            src={e.picture}
+                                            height="250px"
+                                            width="300px"
                                         />
                                     }
                                     actions={[<Icon type="setting" />, <Icon type="edit" />, <Icon type="ellipsis" />]}
                                 >
                                     <Meta
-                                        avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                        title={e.title}
-                                        description={e.description}
+                                        avatar={<Avatar>{e.customerName.substr(0,1)}</Avatar>}
+                                        title={e.ItemName}
                                     />
                                 </Card>
                             </div>

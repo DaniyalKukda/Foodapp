@@ -39,8 +39,6 @@ class Detailview extends Component {
             })
 
         })
-
-
     }
     fetchReasturantData(){
         var docRef = firebase.firestore().collection("users").doc(this.state.id);

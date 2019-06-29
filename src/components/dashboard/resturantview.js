@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Tabs } from 'antd';
 import Navbar from '../navbar/navbar';
 import Statusresturanttabview from "../tabsview/Statusresturanttabview/statusresturanttabview";
+import firebase from "../../config/firebase"
 import "./userview.css"
 
 const { TabPane } = Tabs;
@@ -12,68 +13,26 @@ class Resturantview extends Component {
   constructor() {
     super()
     this.state = {
-      data: [
-        {
-          title: 'random1',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'delivered',
-        },
-        {
-          title: 'random2',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'inprogress',
-        },
-        {
-          title: 'random3',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'pending',
-        },
-        {
-          title: 'Rnfom4',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'delivered',
-        },
-        {
-          title: 'random5',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'inprogress',
-        },
-
-        {
-          title: 'random6',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'pending',
-        },
-        {
-          title: 'random7',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'delivered',
-        },
-        {
-          title: 'random1',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'inprogress',
-        },
-        {
-          title: 'delivered',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'pending',
-        },
-        {
-          title: 'delivered',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'delivered',
-        },
-        {
-          title: 'delivered',
-          description: "Impostor Syndrome is a pervasive feeling of self-doubt, insecurity, or fraudulence",
-          status: 'inprogress',
-        },
-
-      ]
+      data: []
     }
   }
+  componentDidMount(){
+    this.fetchOrders()
+  }
+  fetchOrders() {
+    firebase.firestore().collection('Order').doc().collection("All Orders").onSnapshot((success) => {
+      let data = [];
+      // console.log(success.data())
+      success.forEach((doc) => { 
+        console.log(doc.data())
+        data.push(doc.data())
+      })
+      this.setState({ data })
+
+    })
+  }
   render() {
+    console.log(this.state.data)
     return (
       <div>
         <Navbar />

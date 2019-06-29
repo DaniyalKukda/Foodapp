@@ -20,6 +20,7 @@ export default function detailviewcard(props) {
         firebase.firestore().collection("Order").doc(userid).collection("All Orders").doc().set(order).then((res) => {
             message.success("Order Request Has Been Send Successfully")
         }).catch((err)=>{
+            message.error(err.message)
             console.log(err.messsage)
         })
     }
