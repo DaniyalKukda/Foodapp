@@ -21,7 +21,6 @@ class Detailview extends Component {
         this.fetchFoodItemsForResturant()
         this.fetchReasturantData()
     }
-
     fetchFoodItemsForResturant() {
 
         firebase.firestore().collection('fooditems').doc(this.state.id).collection("AllItems").onSnapshot((success) => {
@@ -48,7 +47,6 @@ class Detailview extends Component {
                this.setState({
                    resturantData:data
                })
-               console.log(data)
             }
              
         }).catch((err)=>{
@@ -58,17 +56,10 @@ class Detailview extends Component {
 
     handleChange(tag, checked) {
         const { selectedTags } = this.state;
-        console.log("tags>", tag)
-        console.log("checked>", checked)
-        console.log("selected>", selectedTags)
         this.setState({ selectedTags: tag })
-        // const nextSelectedTags = checked ? [...selectedTags, tag] : selectedTags.filter(t => t !== tag);
-        // console.log('You are interested in: ', nextSelectedTags);
-        // this.setState({ selectedTags: nextSelectedTags });
     }
     render() {
         const { selectedTags, FoodItem ,resturantData , id} = this.state;
-        console.log(resturantData)
         return (
             <div>
                 <div>
@@ -98,7 +89,6 @@ class Detailview extends Component {
                     {
                         selectedTags === "All" ?
                             FoodItem.length && FoodItem.map((e, i) => {
-                                console.log("eeeeee", e.category)
                                 return <div className="card-container"><Card resturantID={id} docid={e.docid} name={e.fooditem} userData={this.props.user} description={e.description} picture={e.path} /></div>
                             }) : FoodItem.filter((s) => {
                                 return s.category === selectedTags

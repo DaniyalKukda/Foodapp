@@ -1,0 +1,17 @@
+[debug] [2019-06-29T19:07:22.524Z] ----------------------------------------------------------------------
+[debug] [2019-06-29T19:07:22.530Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Danial Kukda\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js deploy
+[debug] [2019-06-29T19:07:22.530Z] CLI Version:   7.0.2
+[debug] [2019-06-29T19:07:22.530Z] Platform:      win32
+[debug] [2019-06-29T19:07:22.530Z] Node Version:  v10.16.0
+[debug] [2019-06-29T19:07:22.532Z] Time:          Sat Jun 29 2019 12:07:22 GMT-0700 (Pacific Daylight Time)
+[debug] [2019-06-29T19:07:22.532Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-06-29T19:07:22.587Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-06-29T19:07:22.588Z] > authorizing via signed-in user
+[debug] [2019-06-29T19:07:22.588Z] [iam] checking project foodapp-1997 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2019-06-29T19:07:22.593Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2019-06-29T19:07:22.593Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2019-06-29T19:07:23.826Z] <<< HTTP RESPONSE 200
+[debug] [2019-06-29T19:07:23.877Z] >>> HTTP REQUEST POST https://cloudresourcemanager.googleapis.com/v1/projects/foodapp-1997:testIamPermissions  
+

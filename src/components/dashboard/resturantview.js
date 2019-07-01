@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Tabs } from 'antd';
 import Navbar from '../navbar/navbar';
 import Statusresturanttabview from "../tabsview/Statusresturanttabview/statusresturanttabview";
-import firebase from "../../config/firebase"
+import firebase from "../../config/firebase";
+import { connect } from "react-redux";
 import "./userview.css"
 
 const { TabPane } = Tabs;
@@ -16,23 +17,30 @@ class Resturantview extends Component {
       data: []
     }
   }
-  componentDidMount(){
-    this.fetchOrders()
+  componentDidMount() {
+    this.fetchOrder()
   }
-  fetchOrders() {
-    firebase.firestore().collection('Order').doc().collection("All Orders").onSnapshot((success) => {
-      let data = [];
+  fetchOrder() {
+    firebase.firestore().collectionGroup("All Orders").onSnapshot((success) => {
       // console.log(success.data())
-      success.forEach((doc) => { 
-        console.log(doc.data())
-        data.push(doc.data())
+      let data = []
+      success.forEach((doc) => {
+        let res = doc.data();
+        let uid = this.props.user.uid;
+        if (res.ResturantID === uid) {
+          // console.log(doc.id, " => ", doc.data())
+          data.push(res)
+        }
+        this.setState({
+          data,
+          docid : doc.id 
+        })
       })
-      this.setState({ data })
-
     })
   }
   render() {
     console.log(this.state.data)
+    console.log(this.state.docid)
     return (
       <div>
         <Navbar />
@@ -74,4 +82,9 @@ class Resturantview extends Component {
     );
   }
 }
-export default Resturantview
+const mapStateToProps = (state) => {
+  return ({
+    user: state.authReducers.user
+  })
+}
+export default connect(mapStateToProps, null)(Resturantview)

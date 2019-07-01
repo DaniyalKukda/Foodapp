@@ -5,7 +5,6 @@ import {message} from "antd"
 const { Meta } = Card;
 
 export default function detailviewcard(props) {
-    console.log("card props",props)
     const orderNow = () => {
         let userid = props.userData.uid;
         let order ={
